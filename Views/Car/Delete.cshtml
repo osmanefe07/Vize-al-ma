@@ -1,0 +1,41 @@
+﻿@model VizeÇalışma.ViewModel.CarModel
+@{
+    ViewData["Title"] = "Araç Sil";
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<form action="Delete" method="post" autocomplete="off">
+    <div class="mb-3">
+        <label class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Marka</label>
+        <input type="text" class="form-control" asp-for="Marka" readonly />
+        
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Model</label>
+        <input type="text" class="form-control" asp-for="Model" readonly />
+        
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Fiyat</label>
+        <input type="text" class="form-control" asp-for="Price" readonly />
+        
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Açıklama</label>
+        <input type="text" class="form-control" asp-for="Description" readonly />
+    
+    </div>
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label">Durumu</label>
+        <input type="checkbox" class="form-check" asp-for="Status"> Aktif
+    </div>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-danger"onclick="return function('Bu ögeyi silmek üzeresiniz') ">Delete</button>
+    </div>
+
+</form>

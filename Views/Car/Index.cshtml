@@ -1,0 +1,101 @@
+﻿@using VizeÇalışma.ViewModel;
+@model List<CarModel>
+@{
+    ViewData["Title"] = "Araç Sayfası";
+    var succesMessage = TempData["succesMessage"]?.ToString();
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+@if (!string.IsNullOrWhiteSpace(succesMessage))
+{
+    <div class="alert alert-success">
+        <strong>Başarılı   </strong>@succesMessage
+    </div>
+    <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+}
+else if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Hata   </strong>@errorMessage
+    </div>
+    <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+}
+
+<form>
+    <button asp-action="Insert" asp-controller="Car" class="btn btn-primary" >Araç Oluştur</button>
+    <table class="table table-responsive table-hover"> 
+        <thead>
+            <tr class="table-active">
+                <th class="text-center">Id</th>
+                <th class="text-center">Marka</th>
+                <th class="text-center">Model</th>
+                <th class="text-center">Fiyat</th>
+                <th class="text-center">Açıklama</th>
+                <th class="text-center">Durum</th>
+                <th class="text-center">İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(Model != null && Model.Any())
+            {
+                @foreach (var car in Model)
+                {
+                    <tr>
+                        <td class="text-center">@car.Id</td>
+                        <td class="text-center">@car.Marka</td>
+                        <td class="text-center">@car.Model</td>
+                        <td class="text-center">@car.Price</td>
+                        <td class="text-center">@car.Description</td>
+                        <td class ="text-center">
+                            @if (car.Status)
+                            {
+                                <a asp-action="ChangeStatus" asp-route-id="@car.Id" asp-route-st="False"><span class="badge bg-success">Aktif</span></a>
+                            }
+                            else
+                            {
+
+                                <a asp-action="ChangeStatus" asp-route-id="@car.Id" asp-route-st="True"> <span class="badge bg-danger">Pasif</span></a>
+                            }
+
+                        
+                        </td>
+
+
+
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <a asp asp-controller="Car" asp-action="Edit" asp-route-id="@car.Id" class="btn btn-warning">Düzenle</a>
+                            </div>
+                       
+                        
+                            <div class="btn-group btn-group-sm">
+                            <a asp asp-controller="Car" asp-action="Delete" asp-route-id="@car.Id" class="btn btn-danger">Sil</a>
+                            </div>
+
+                            <div class="btn-group btn-group-sm">
+                            <a asp asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id" class="btn btn-primary">Detay</a>
+                            </div>
+                        </td>
+
+
+                            
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">
+                        <div>
+                            Araç bulunmamaktadır.
+                        </div>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</form>

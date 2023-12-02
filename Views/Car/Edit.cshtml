@@ -1,0 +1,48 @@
+﻿@model VizeÇalışma.ViewModel.CarModel
+@{
+    ViewData["Title"] = "Araç Düzenle";
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Hata   </strong>@errorMessage
+    <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
+<form action="Edit" method="post" autocomplete="off">
+    <div class="mb-3">
+        <label class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Marka</label>
+        <input type="text" class="form-control" asp-for="Marka" />
+        <span asp-validation-for="Marka" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Model</label>
+        <input type="text" class="form-control" asp-for="Model" />
+        <span asp-validation-for="Model" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Fiyat</label>
+        <input type="text" class="form-control" asp-for="Price" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Açıklama</label>
+        <input type="text" class="form-control" asp-for="Description" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label">Durumu</label>
+        <input type="checkbox" class="form-check" asp-for="Status"> Aktif
+    </div>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-success">Kaydet</button>
+    </div>
+
+</form>
